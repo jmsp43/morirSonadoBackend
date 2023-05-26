@@ -1,7 +1,7 @@
 const express = require("express");
 const mongoose = require("mongoose");
 const db = mongoose.connection;
-const itemsData = require("./utilities/data");
+// const itemsData = require("./utilities/data");
 const routesController = require("./controllers/routes");
 const Items = require("./models/items");
 require("dotenv").config();
@@ -13,7 +13,8 @@ const PORT = process.env.PORT || 3001;
 
 //connecting to mongoDB
 mongoose.connect(mongoURI, {
-      useNewUrlParser: true,
+  useNewUrlParser: true,
+  useUnifiedTopology: true,
  })
 
 //error and disconnection messages

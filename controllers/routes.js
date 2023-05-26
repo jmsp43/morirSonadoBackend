@@ -12,10 +12,10 @@ Router.get(('/'),(req, res) => {
 Router.get("/food", async(req, res) => {
       try {
           const allFood = await Items.find({})
-          res.render("Index", { items: allFood })
+          res.send(allFood)
       }
       catch (error) {
-          console.log(error.message)
+          console.log(error)
       }
   });
 
@@ -25,7 +25,11 @@ Router.get("/food", async(req, res) => {
 
 
 //delete
-
+// Router.delete('/:id', (req, res) => {
+//     const deletedItem = req.params.id
+//     Items.findByIdAndRemove(deletedItem)
+//     res.json(deletedItem)
+// })
 
 
 //update
@@ -36,12 +40,17 @@ Router.get("/food", async(req, res) => {
 
 
 
+
 //edit
 
 
 
 //show
-
+Router.get('/:id', (req, res) => {
+    const foundItem = req.params.id
+    Items.findById(foundItem)
+    res.json(foundItem)
+})
 
 
 module.exports = Router
