@@ -1,6 +1,7 @@
 const express = require("express");
 const mongoose = require("mongoose");
 const db = mongoose.connection;
+const cors = require('cors')
 const routesController = require("./controllers/routes");
 const menuItems = require('./utilities/data')
 const Items = require('./models/itemSchema')
@@ -26,9 +27,10 @@ app.use(express.json());
 app.use(express.static("public"));
 //tell express to use the public directory for static files, including index.html as the route of the application.
 //Then attach React to that file
+app.use(cors({ origin: '*' })) // used to whitelist requests
 
 // Routes
-app.use('/api/', routesController);
+app.use(routesController);
 // telling server.js to get the routes from controllers folder
 
 // Seeding
