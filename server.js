@@ -1,9 +1,9 @@
 const express = require("express");
 const mongoose = require("mongoose");
 const db = mongoose.connection;
-// const itemsData = require("./utilities/data");
 const routesController = require("./controllers/routes");
-const Items = require("./models/itemSchema");
+const itemsData = require('./utilities/data')
+const Items = require('./models/itemSchema')
 require("dotenv").config();
 
 const app = express();
@@ -28,15 +28,14 @@ app.use(express.static("public"));
 //Then attach React to that file
 
 // Routes
-app.use(routesController);
+app.use('/api/', routesController);
 // telling server.js to get the routes from controllers folder
 
 // Seeding
-//don't know if i need to do this with a food delivery service?
-// app.get('/seed', async (req, res) => {
-//     await Items.deleteMany({});
-//     await Items.insertMany(itemsData);
-//   });
+app.get('/seed', async (req, res) => {
+    await Items.deleteMany({});
+    await Items.insertMany(itemsData);
+  });
 
 app.listen(PORT, () => {
   console.log(

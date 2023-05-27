@@ -1,13 +1,15 @@
 const express = require("express");
 const Router = express.Router();
 const Items = require("../models/itemSchema");
+const Order = require('../models/orderSchema')
 
 Router.get("/", (req, res) => {
-  res.send("Bienvenidos a Morir Soñando");
+  res.json(
+    { message: "Bienvenidos a Morir Soñando" });
 });
 
-// Index : Show all the things - GET /food
-Router.get("/food", async (req, res) => {
+// Index : Show all the food - GET /menu
+Router.get("/menu", async (req, res) => {
   try {
     const allFood = await Items.find({});
     res.send(allFood);
