@@ -2,7 +2,7 @@ const express = require("express");
 const mongoose = require("mongoose");
 const db = mongoose.connection;
 const routesController = require("./controllers/routes");
-const itemsData = require('./utilities/data')
+const menuItems = require('./utilities/data')
 const Items = require('./models/itemSchema')
 require("dotenv").config();
 
@@ -34,7 +34,8 @@ app.use('/api/', routesController);
 // Seeding
 app.get('/seed', async (req, res) => {
     await Items.deleteMany({});
-    await Items.insertMany(itemsData);
+  await Items.insertMany(menuItems);
+  res.send('seeded')
   });
 
 app.listen(PORT, () => {

@@ -19,24 +19,36 @@ Router.get("/menu", async (req, res) => {
 });
 
 //new
+//handled in react?
 
 //delete
-// Router.delete('/:id', (req, res) => {
-//     const deletedItem = req.params.id
-//     Items.findByIdAndRemove(deletedItem)
-//     res.json(deletedItem)
-// })
+ Router.delete("/deleteItem/:id", (req, res) => {
+   const deletedItem = req.params.id;
+   Order.findByIdAndRemove(deletedItem);
+   res.json({ message: deletedItem, message2: Order });
+ });
 
 //update
+Router.put('/updateOrder/:id', (req, res)=>{
+  const updatedItem = req.params.id;
+  Order.findByIdAndUpdate(updatedItem);
+  res.json({ message: updatedItem, message2: Order });
+});
 
 //create
+// Router.post('/newOrder/', (req, res)=>{
+//   Order.create(
+//     //put items in here
+//   )
+// })
 
 //edit
+//handled in react?
 
 //show
-Router.get("/:id", (req, res) => {
-  const foundItem = req.params.id;
-  Items.findById(foundItem);
+Router.get("/menu/:name", async (req, res) => {
+  const wantedItem = req.params;
+  const foundItem = await Items.find({name: wantedItem.name})
   res.json(foundItem);
 });
 
