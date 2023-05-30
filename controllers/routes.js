@@ -45,11 +45,14 @@ Router.put('/updateOrder/:id', (req, res)=>{
 //edit
 //handled in react?
 
+
 //show
 Router.get("/menu/:name", async (req, res) => {
   const wantedItem = req.params;
-  const foundItem = await Items.find({name: wantedItem.name})
+  const foundItem = await Items.find({ name: wantedItem.name })
+  //find by id and update based on id not name
   res.json(foundItem);
 });
+
 
 module.exports = Router;
