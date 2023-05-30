@@ -2,7 +2,7 @@ const itemData = [
       {
             section: 'Entrees',
             name: 'Pescado Frito con arroz blanco y maduros',
-            price: 15,description: 'Fried Whole Red Snapper with white rice and sweet plantain', amountOrdered: 2
+            price: 15,description: 'Fried Whole Red Snapper with white rice and sweet plantain', amountOrdered: 0
       },
       {
             section: 'Combos',
