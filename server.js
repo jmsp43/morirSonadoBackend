@@ -1,10 +1,10 @@
 const express = require("express");
 const mongoose = require("mongoose");
 const db = mongoose.connection;
-const cors = require('cors')
+const cors = require("cors");
 const routesController = require("./controllers/routes");
-const menuItems = require('./utilities/data')
-const Items = require('./models/itemSchema')
+const menuItems = require("./utilities/data");
+const Items = require("./models/Order");
 require("dotenv").config();
 
 const app = express();
@@ -27,18 +27,18 @@ app.use(express.json());
 app.use(express.static("public"));
 //tell express to use the public directory for static files, including index.html as the route of the application.
 //Then attach React to that file
-app.use(cors({ origin: '*' })) // used to whitelist requests
+app.use(cors({ origin: "*" })); // used to whitelist requests
 
 // Routes
 app.use(routesController);
 // telling server.js to get the routes from controllers folder
 
 // Seeding
-app.get('/seed', async (req, res) => {
-    await Items.deleteMany({});
+app.get("/seed", async (req, res) => {
+  await Items.deleteMany({});
   await Items.insertMany(menuItems);
-  res.send('seeded')
-  });
+  res.send("seeded");
+});
 
 app.listen(PORT, () => {
   console.log(
