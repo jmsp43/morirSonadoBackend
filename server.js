@@ -4,7 +4,7 @@ const db = mongoose.connection;
 const cors = require("cors");
 const routesController = require("./controllers/routes");
 const menuItems = require("./utilities/data");
-const Items = require("./models/Order");
+const { Item } = require("./models/Order");
 require("dotenv").config();
 
 const app = express();
@@ -35,8 +35,9 @@ app.use(routesController);
 
 // Seeding
 app.get("/seed", async (req, res) => {
-  await Items.deleteMany({});
-  await Items.insertMany(menuItems);
+  // await Item.remove({})
+  await Item.deleteMany({});
+  await Item.insertMany(menuItems);
   res.send("seeded");
 });
 
