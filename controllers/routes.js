@@ -32,9 +32,10 @@ Router.get("/receipt", async (req, res) => {
 //handled in react?
 
 //delete
-Router.delete("/:id", (req, res) => {
+Router.delete("/:id", async(req, res) => {
   const deletedOrder = req.params.id;
-  Order.findOneAndDelete({id: deletedOrder})
+  await Order.findByIdAndDelete(deletedOrder)
+  console.log(deletedOrder)
   res.json({ message: deletedOrder});
 });
 
