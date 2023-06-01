@@ -17,7 +17,7 @@ Router.get("/menu", async (req, res) => {
   }
 });
 
-// Index : Show all the food - GET /menu
+
 Router.get("/receipt", async (req, res) => {
   try {
     const allOrders = await Order.find({});
@@ -34,14 +34,16 @@ Router.get("/receipt", async (req, res) => {
 //delete
 Router.delete("/:id", (req, res) => {
   const deletedOrder = req.params.id;
-  Order.findOneAndDelete({_id: deletedOrder})
+  Order.findOneAndDelete({id: deletedOrder})
   res.json({ message: deletedOrder});
 });
 
+
+
 //update
-Router.put("/:id", (req, res) => {
+Router.put("/:id", async (req, res) => {
   const updatedItem = req.params.id;
-  Item.findByIdAndUpdate(updatedItem);
+  await Item.findByIdAndUpdate(updatedItem, req.body);
   res.json({ message: updatedItem});
 });
 
@@ -56,10 +58,9 @@ Router.post('/newOrder', (req, res) => {
 //handled in react?
 
 //show
-Router.get("/menu/:name", async (req, res) => {
-  const wantedItem = req.params;
-  const foundItem = await Item.find({ name: wantedItem.name });
-  //find by id and update based on id not name
+Router.get("/menu/:id", async (req, res) => {
+  const wantedItem = req.params.id;
+  const foundItem = await Item.findById(wantedItem);
   res.json(foundItem);
 });
 
