@@ -59,9 +59,9 @@ Router.post('/newOrder', (req, res) => {
 //handled in react?
 
 //show
-Router.get("/menu/:id", async (req, res) => {
-  const wantedItem = req.params.id;
-  const foundItem = await Item.findById(wantedItem);
+Router.get("/menu/:name", async (req, res) => {
+  const wantedItem = req.params.name;
+  const foundItem = await Item.find({ name: wantedItem });
   res.json(foundItem);
 });
 
