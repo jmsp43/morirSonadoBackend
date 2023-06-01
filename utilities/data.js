@@ -47,6 +47,7 @@ const itemData = [
       {
             section: 'Appetizers',
             name: 'Queso Frito',
+            //delete amountordered
             price: 4, description: 'Fried cheese', amountOrdered: 0
       }
   ]

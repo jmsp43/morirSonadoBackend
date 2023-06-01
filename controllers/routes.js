@@ -1,6 +1,7 @@
 const express = require("express");
 const Router = express.Router();
-const { Item, Order } = require("../models/Order")
+const { Item, Order } = require("../models/Order");
+
 
 Router.get("/", (req, res) => {
   res.json({ message: "Bienvenidos a Morir Soñando" });
@@ -16,29 +17,40 @@ Router.get("/menu", async (req, res) => {
   }
 });
 
+// Index : Show all the food - GET /menu
+Router.get("/receipt", async (req, res) => {
+  try {
+    const allOrders = await Order.find({});
+    res.send(allOrders);
+  } catch (error) {
+    console.log(error);
+  }
+});
+
+
 //new
 //handled in react?
 
 //delete
-Router.delete("/deleteItem/:id", (req, res) => {
-  const deletedItem = req.params.id;
-  Order.findByIdAndRemove(deletedItem);
-  res.json({ message: deletedItem, message2: Order });
+Router.delete("/:id", (req, res) => {
+  const deletedOrder = req.params.id;
+  Order.findOneAndDelete({_id: deletedOrder})
+  res.json({ message: deletedOrder});
 });
 
 //update
-Router.put("/updateOrder/:id", (req, res) => {
+Router.put("/:id", (req, res) => {
   const updatedItem = req.params.id;
-  Order.findByIdAndUpdate(updatedItem);
-  res.json({ message: updatedItem, message2: Order });
+  Item.findByIdAndUpdate(updatedItem);
+  res.json({ message: updatedItem});
 });
 
 //create
-// Router.post('/newOrder/', (req, res)=>{
-//   Order.create(
-//     //put items in here
-//   )
-// })
+Router.post('/newOrder', (req, res) => {
+  const createdOrder = req.body
+  Order.create(createdOrder)
+  res.json({ message: createdOrder })
+})
 
 //edit
 //handled in react?

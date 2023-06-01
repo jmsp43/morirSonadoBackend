@@ -16,8 +16,7 @@ const Item = new mongoose.Schema({
 
 const Order = new mongoose.Schema({
       price: Number,
-      contents: Object,
-      numItems: Number,
+      // numItems: Number,
       items: [Item]
 })
 
